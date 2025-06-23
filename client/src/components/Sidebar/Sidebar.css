@@ -1,0 +1,41 @@
+.sidebar {
+  width: 200px;
+  background: #f4f4f4;
+  padding: 20px;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar button:hover {
+  background: #ccc;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background: #fff;
+}
+
+.sidebar ul {
+  list-style-type: none; /* loại bỏ bullet */
+  padding-left: 0; /* loại bỏ thụt lề mặc định */
+}
+
+.sidebar li {
+  margin-bottom: 8px; /* cách nhau một chút cho dễ nhìn */
+}
+
+.sidebar button.active {
+  background: #aaa; /* màu xám đậm hơn khi được chọn */
+  color: white;
+  font-weight: bold;
+}

@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import "./App.css";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Buoi1 from "./components/Buoi1/Buoi1";
+import Buoi2 from "./components/Buoi2/Buoi2";
+import Buoi3 from "./components/Buoi3/Buoi3";
 
 function App() {
-  const [pongMessage, setPongMessage] = useState('');
+  const [selectedSession, setSelectedSession] = useState("Buổi 1");
 
-  useEffect(() => {
-    axios.get('http://localhost:1337/api/ping')
-      .then(response => {
-        setPongMessage(response.data.message);
-      })
-      .catch(error => {
-        console.error('Error calling ping API:', error);
-        setPongMessage('Lỗi khi gọi API');
-      });
-  }, []);
+  const renderContent = () => {
+    switch (selectedSession) {
+      case "Buổi 1":
+        return <Buoi1 />;
+      case "Buổi 2":
+        return <Buoi2 />;
+      case "Buổi 3":
+      return <Buoi3 />;
+      default:
+        return <div>Chọn buổi học ở thanh bên</div>;
+    }
+  };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '100px' }}>
-      <h1>Welcome to My CMS</h1>
-      <h2>{pongMessage}</h2>
+    <div className="app">
+      <header className="header">CMS Learning Platform</header>
+      <div className="main">
+        <Sidebar setSelectedSession={setSelectedSession} selectedSession={selectedSession}/>
+        <section className="content">{renderContent()}</section>
+      </div>
     </div>
   );
 }
