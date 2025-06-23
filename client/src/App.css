@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+
+.app {
+  font-family: sans-serif;
+}
+.header {
+  height: 60px;
+  background: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+.main {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+.sidebar {
+  width: 200px;
+  background: #f4f4f4;
+  padding: 20px;
+}
+.content {
+  flex: 1;
+  padding: 20px;
+  background: #fff;
+}
+
+.main-content {
+   min-height: calc(100vh - 140px);
+}
