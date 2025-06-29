@@ -43,7 +43,7 @@ module.exports.security = {
   * https://sailsjs.com/docs/concepts/security/csrf                           *
   *                                                                           *
   ****************************************************************************/
-
-  csrf: true
+  // True if you want to block POST without login
+  csrf: false
 
 };

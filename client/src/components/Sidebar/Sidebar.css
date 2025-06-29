@@ -19,12 +19,6 @@
   background: #ccc;
 }
 
-.content {
-  flex: 1;
-  padding: 20px;
-  background: #fff;
-}
-
 .sidebar ul {
   list-style-type: none; /* loại bỏ bullet */
   padding-left: 0; /* loại bỏ thụt lề mặc định */

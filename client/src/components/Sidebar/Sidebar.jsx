@@ -2,7 +2,7 @@ import React from "react";
 import "./Sidebar.css"; // nếu muốn tách CSS
 
 function Sidebar({ setSelectedSession, selectedSession }) {
-  const sessions = ["Buổi 1", "Buổi 2", "Buổi 3", "Buổi 4"];
+  const sessions = ["Buổi 1", "Buổi 2", "Buổi 3", "Buổi 4", "Các buổi còn lại"];
 
   return (
     <aside className="sidebar">

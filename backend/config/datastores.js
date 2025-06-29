@@ -13,6 +13,8 @@
  * https://sailsjs.com/config/datastores
  */
 
+require('dotenv').config(); // Load biến môi trường
+
 module.exports.datastores = {
 
 
@@ -33,6 +35,9 @@ module.exports.datastores = {
   ***************************************************************************/
 
   default: {
+
+    adapter: 'sails-mongo',
+    url: process.env.MONGO_URL,
 
     /***************************************************************************
     *                                                                          *

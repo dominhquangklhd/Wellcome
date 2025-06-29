@@ -45,7 +45,6 @@ module.exports.routes = {
   //  ║║║║╣ ╠╩╗╠═╣║ ║║ ║╠╩╗╚═╗
   //  ╚╩╝╚═╝╚═╝╩ ╩╚═╝╚═╝╩ ╩╚═╝
   // …
-  'GET /api/ping': 'PingController.ping',
 
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
@@ -63,4 +62,11 @@ module.exports.routes = {
   'POST  /api/v1/deliver-contact-form-message':          { action: 'deliver-contact-form-message' },
   'POST  /api/v1/observe-my-session':                 { action: 'observe-my-session', hasSocketFeatures: true },
 
+  'GET /api/ping': 'PingController.ping',
+
+  'GET /api/products': 'ProductController.find',
+  'GET /api/products/:id': 'ProductController.findOne',
+  'POST /api/products': 'ProductController.create',
+  'PUT /api/products/:id': 'ProductController.update',
+  'DELETE /api/products/:id': 'ProductController.delete',
 };

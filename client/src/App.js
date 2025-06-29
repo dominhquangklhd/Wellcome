@@ -5,6 +5,7 @@ import Buoi1 from "./components/Buoi1/Buoi1";
 import Buoi2 from "./components/Buoi2/Buoi2";
 import Buoi3 from "./components/Buoi3/Buoi3";
 import Buoi4 from "./components/Buoi4/Buoi4";
+import ProductPage from "./Pages/ProductPage/ProductPage";
 
 function App() {
   const [selectedSession, setSelectedSession] = useState("Buổi 1");
@@ -19,6 +20,8 @@ function App() {
         return <Buoi3 />;
       case "Buổi 4":
         return <Buoi4 />;
+      case "Các buổi còn lại":
+        return <ProductPage />;
       default:
         return <div>Chọn buổi học ở thanh bên</div>;
     }

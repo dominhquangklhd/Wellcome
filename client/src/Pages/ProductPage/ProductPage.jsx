@@ -1,0 +1,111 @@
+import { useEffect, useState } from 'react';
+import {Routes, Route, Link} from 'react-router-dom';
+
+import './ProductPage.css'
+
+import ProductService from '../../services/ProductService';
+import ProductForm from '../../components/ProductForm/ProductForm';
+import ProductList from '../../components/ProductList/ProductList';
+import AboutPage from '../AboutPage/AboutPage';
+
+function ProductPage() {
+  const [products, setProducts] = useState([]);
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    document.body.className = theme;
+  }, [theme]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await ProductService.getAll();
+        setProducts(data);
+      } catch (error) {
+        console.error('Lỗi lấy danh sách:', error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
+  const handleAddProduct = async (product) => {
+    try {
+      const newProduct = await ProductService.create(product);
+      setProducts((products) => [...products, newProduct]);
+    } catch (error) {
+      console.error('Lỗi thêm sản phẩm:', error);
+    }
+  };
+
+  const handleDeleteProduct = async (id) => {
+    try {
+      await ProductService.remove(id);
+      setProducts((prev) => prev.filter((p) => p.id !== id));
+    } catch (error) {
+      console.error('Lỗi xoá sản phẩm:', error);
+    }
+  };
+
+  const handleEditProduct = async (product) => {
+    try {
+      if (editingProduct) {
+        await ProductService.update(editingProduct.id, product);
+        setProducts(products.map(p => p.id === product.id ? product : p));
+        setEditingProduct(null);
+      } else {
+        setEditingProduct(product);
+      }
+    } catch (error) {
+      console.error('Lỗi cập nhật sản phẩm:', error);
+    }
+  };
+
+  return (
+    <div className="app">
+      <header className="header header-productpage">
+        CMS Header
+        <button className='theme-button' onClick={toggleTheme}>
+          Chuyển theme ({theme === 'light' ? 'Sáng' : 'Tối'})
+        </button>
+      </header>
+      <div className="main-buoi2">
+        <aside className="sidebar">
+          <Link to="/products">
+            <button>Sản phẩm</button>
+          </Link>
+          <Link to="/add">
+            <button>Thêm</button>
+          </Link>
+          <Link to="/about">
+            <button>Giới thiệu</button>
+          </Link>
+        </aside>
+        <section className="content">
+          <h1>Quản lý sản phẩm</h1>
+          <Routes>
+            <Route path="/products" element={
+              <ProductList
+                products={products}
+                onDelete={handleDeleteProduct}
+                onEdit={handleEditProduct}
+                editingProduct={editingProduct}
+                setEditingProduct={setEditingProduct}
+              />} />
+            <Route path="/add" element={<ProductForm onAddProduct={handleAddProduct} />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+export default ProductPage;

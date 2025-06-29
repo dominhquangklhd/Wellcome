@@ -24,6 +24,10 @@ module.exports.policies = {
 
   PingController: {
     '*': true
+  },
+
+  Product: {
+    '*': true
   }
 
 };
