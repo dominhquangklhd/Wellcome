@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Input from "../Input/Input";
 
 function ProductForm({ onAddProduct }) {
     const [name, setName] = useState("");
@@ -17,12 +18,12 @@ function ProductForm({ onAddProduct }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input
+            <Input
                 placeholder="Tên sản phẩm"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
             />
-            <input
+            <Input
                 placeholder="Giá"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
