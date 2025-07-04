@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../services/ProductService";
 
 function Buoi1() {
   const [pongMessage, setPongMessage] = useState("");
+  const isProd = window.location.hostname !== 'localhost';
+
+  const API_URL = isProd
+    ? 'https://wellcome-ynlb.onrender.com/api/ping'
+    : 'http://localhost:1337/api/ping';
+
 
   useEffect(() => {
     axios
