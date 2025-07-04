@@ -317,7 +317,7 @@ module.exports = {
 
   http: {
     port: process.env.PORT || 1337,
-    trustProxy: true
+    trustProxy: true,
 
     /***************************************************************************
     *                                                                          *
