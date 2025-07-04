@@ -9,6 +9,14 @@ import ProductPage from "./Pages/ProductPage/ProductPage";
 
 function App() {
   const [selectedSession, setSelectedSession] = useState("Buổi 1");
+  const now = new Date().toLocaleString();
+  localStorage.setItem("lastVisit", now);
+  const lastVisit = localStorage.getItem("lastVisit");
+
+  window.addEventListener("beforeunload", () => {
+    localStorage.setItem("lastExitTime", new Date().toLocaleString());
+  });
+  const lastExit = localStorage.getItem("lastExitTime");
 
   const renderContent = () => {
     switch (selectedSession) {
@@ -31,9 +39,16 @@ function App() {
     <div className="app">
       <header className="header">CMS Learning Platform</header>
       <div className="main">
-        <Sidebar setSelectedSession={setSelectedSession} selectedSession={selectedSession}/>
+        <Sidebar
+          setSelectedSession={setSelectedSession}
+          selectedSession={selectedSession}
+        />
         <section className="content main-content">{renderContent()}</section>
       </div>
+      <footer>
+        <p>Lần đăng nhập gần nhất: {lastVisit}</p>
+        <p>Lần thoát gần nhất: {lastExit}</p>
+      </footer>
     </div>
   );
 }

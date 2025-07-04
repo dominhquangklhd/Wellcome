@@ -66,3 +66,12 @@
 .main-content {
   min-height: calc(100vh - 140px);
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 8px 16px;
+  font-size: 14px;
+  z-index: 1000;
+}
