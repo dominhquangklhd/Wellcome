@@ -1,6 +1,6 @@
 <div id="top">
 </div>
-<h1>CRUD PRODUCT APP</h1>
+<h1>CMS PRODUCT MANGAGEMENT</h1>
 <!-- MOVIE TICKET APP -->
 
 ## Danh mục
@@ -43,118 +43,139 @@ Dự án đồng thời là cơ hội để vận dụng kiến thức về Reac
 
 ## II. Mô tả
 
-<!-- Ý TƯỞNG -->
-<a href="https://www.youtube.com/watch?v=kdKI1uDDsek">
-   <h4>App Demo Video</h4>
-   </a>
-<a href="https://www.youtube.com/watch?v=kdKI1uDDsek">
-   https://www.youtube.com/watch?v=kdKI1uDDsek
-   </a>
 <div id="Ytuong"></div>
 
 ### 1. Ý tưởng
 
-* Giao diện ứng dụng thân thiện, dễ sử dụng đối với người dùng.
+* Xây dựng giao diện ứng dụng đơn giản, thân thiện, dễ sử dụng cho người quản trị sản phẩm.
 
-* Đáp ứng các tính năng cơ bản cần có của một ứng dụng quản lí rạp phim.
+* Đáp ứng đầy đủ các chức năng cơ bản của một hệ thống quản lý sản phẩm: thêm, sửa, xóa, tìm kiếm và phân trang.
 
-* Có thể mở rộng thêm các chức năng, đặc trưng mới trong tương lai.
+* Hỗ trợ chế độ tối (dark mode), lưu trạng thái theme bằng localStorage để nâng cao trải nghiệm người dùng.
 
+* Dễ dàng mở rộng trong tương lai như thêm chức năng đăng nhập, phân quyền, quản lý người dùng, hoặc tích hợp cơ sở dữ liệu thực.
 
-<div id="Congnghe"></div>
 
 ### 2. Công nghệ
-* Hệ thống API: Android API (Application Programming Interface)
-* IDE: Android Studio
-* Database: Firebase 
-* Công cụ quản lý: Git, GitHub
+* Frontend: React.js – xây dựng giao diện người dùng, sử dụng JSX và React Router để điều hướng.
+* Backend / API: Sails.js – framework Node.js hỗ trợ tạo RESTful API nhanh chóng và dễ mở rộng.
+* Database: localDiskDB (mặc định của Sails) – dùng để lưu trữ dữ liệu sản phẩm trong quá trình phát triển.
+* Lưu trữ trình duyệt: LocalStorage – lưu thông tin như dark mode hoặc thời gian truy cập gần nhất.
+* Công cụ quản lý mã nguồn: Git & GitHub – quản lý phiên bản mã, cộng tác và lưu trữ project.
 
 
 <div id="Doituongsudung"></div>
 
 ### 3. Đối tượng sử dụng
 Đối tượng sử dụng của ứng dụng bao gồm:
-* Những nhà quản lí vé, rạp phim
-* Khách hàng muốn đặt vé xem phim
+* Quản trị viên hoặc chủ cửa hàng cần quản lý danh sách sản phẩm một cách nhanh chóng và hiệu quả.
+* Nhân viên bán hàng cần tra cứu, cập nhật thông tin sản phẩm trong quá trình làm việc.
+* Người học lập trình muốn thực hành xây dựng hệ thống quản lý nội dung đơn giản với React và Sails.js.
 
 
 <div id="Muctieu"></div>
 
 ### 4. Mục tiêu
 
- * <strong>Ứng dụng thực tế</strong>
- 
-    * Hướng đến việc cung cấp một giải pháp hiệu quả để quản lí và tổ chức hoạt động của rạp phim, đồng thời mang lại trải nghiệm tốt nhất cho khách hàng.
-    
-    * Trở thành một trong những ứng dụng được khách hàng và các nhà quản lí lựa chọn, tin tưởng sử dụng.
+* Xây dựng một ứng dụng web đơn giản giúp người quản trị có thể dễ dàng thêm, sửa, xóa và tìm kiếm sản phẩm.
 
+* Thực hành tổng hợp kiến thức về frontend (React) và backend (Sails.js) để tạo ra một hệ thống quản lý nội dung thực tế.
 
- * <strong>Yêu cầu ứng dụng</strong>
- 
-    * Đáp ứng các tính năng cơ bản cần có của một ứng dụng quản lí rạp phim.
-    
-    * Nâng cao trải nghiệm của người sử dụng.
-    
-    * Dễ dàng tra cứu các thông tin cần thiết.
-    
-    * Giao diện thân thiện, dễ sử dụng, bố cục hợp lý, hài hoà về màu sắc và mang tính đồng bộ cao, phân quyền cho người dùng thông qua tài khoản.
-    
-    * Ứng dụng phải tương thích với đa số các thiết bị sử dụng hệ điều hành Android.
+* Cải thiện trải nghiệm người dùng thông qua các tính năng như phân trang, tìm kiếm nhanh và chế độ tối (dark mode).
 
-    * Có thể mở rộng thêm các chức năng, đặc trưng mới trong tương lai.
+* Tạo nền tảng có thể dễ dàng mở rộng trong tương lai như thêm xác thực người dùng, phân quyền hoặc kết nối với cơ sở dữ liệu thật.
 
 
 <div id="Tinhnang"></div>
 
 ### 5. Tính năng
 
-Quản lý tài khoản
+* **Quản lý sản phẩm**  
+  - Thêm, sửa, xóa thông tin sản phẩm.  
+  - Hiển thị danh sách sản phẩm dưới dạng bảng hoặc thẻ.
 
-Quản lý vé
+* **Tìm kiếm sản phẩm**  
+  - Tìm kiếm theo tên sản phẩm.  
+  - Lọc kết quả theo từ khóa.
 
-Quản lý phim
+* **Phân trang sản phẩm**  
+  - Hiển thị dữ liệu theo trang.  
+  - Điều hướng giữa các trang dễ dàng.
 
-Quản lý phiếu giảm giá
+* **Chế độ tối (Dark Mode)**  
+  - Giao diện sáng/tối linh hoạt.  
+  - Lưu trạng thái vào localStorage.
 
-Quản lí bắp nước
+* **Lưu trữ client-side**  
+  - Lưu lần truy cập gần nhất của người dùng.  
+  - Ghi nhớ chế độ giao diện đã chọn.
 
 
 <div id="CaiDat"></div>
 
 ## III. Hướng dẫn cài đặt
-### Requirements
+### 1. Yêu cầu hệ thống
 
-* Android Studio
+- Node.js >= 16  
+- npm >= 8  
+- Git
 
-### Installation
+---
 
-1. Tải Android Studio từ [the Android Studio website](https://developer.android.com/studio).
-2. Tải Movie Ticket App Source :  https://github.com/ManhHoDinh/MovieTicketApp
-3. Trong dự án, nháy chọn Sync Project with Gradle Files để khởi chạy những thư viện cần thiết.
-5. Chạy ứng dụng bằng cách nháy chọn Run "app" hoặc tổ hợp phím Shift+F10. Ứng dụng sẽ được chạy trên thiết bị (thật hoặc ảo) của bạn.
+### 2. Clone dự án
+
+```bash
+git clone https://github.com/your-username/mini-cms.git
+cd mini-cms
+```
+
+### 3. Tạo file .env
+
+Trong folder backend, hãy tạo một file .env để lưu url kết nối với DB.
+Để với tên biến là MONGO_URL như sau:
+```bash
+MONGO_URL=mongodb+srv://2uangthor:q25012004@cluster0.x6pqf.mongodb.net/ManageProduct?retryWrites=true&w=majority
+```
+
+### 4. Cài đặt và chạy Backend (Sails.js)
+
+```bash
+cd backend
+npm install
+sails lift
+```
+
+### 5. Cài đặt và chạy Frontend (React)
+
+```bash
+cd client
+npm install
+npm start
+```
 
 <div id="Tacgia"></div>
 
 ## IV. Tác giả
 
-* [Hồ Đình Mạnh](https://github.com/ManhHoDinh)
+* [Đỗ Minh Quang](https://github.com/dominhquangklhd)
 
-* [Võ Công Bình](https://github.com/vocongbinh)
+## V. Hướng phát triển tiếp theo
 
-* [Phạm Thanh Tường](https://github.com/TuongPhamCT)
+* Tích hợp hệ thống đăng nhập và phân quyền người dùng (quản trị viên, nhân viên).
 
-* [Lý Thanh Tú Anh](https://github.com/anhtu193)
+* Thêm chức năng quản lý danh mục sản phẩm (ví dụ: thời trang, điện tử, sách...).
 
-* [Phạm Nguyễn Nhật Duy](https://github.com/heluDuyne)
+* Hỗ trợ tải lên và hiển thị hình ảnh sản phẩm.
 
+* Triển khai ứng dụng online:
 
-<!-- NGƯỜI HƯỚNG DẪN -->
-<div id="Nguoihuongdan"></div>
+ - Backend (Sails.js) lên Render
 
-## V. Người hướng dẫn
-* Giảng viên: Nguyễn Tấn Toàn
+ - Frontend (React) lên Vercel hoặc Netlify
 
+* Tối ưu giao diện responsive để hiển thị tốt trên điện thoại và máy tính bảng.
 
+* Cải thiện UX/UI với thư viện như Tailwind CSS hoặc Material UI.
 
 <!-- TỔNG KẾT -->
 <div id="Tongket"></div>
