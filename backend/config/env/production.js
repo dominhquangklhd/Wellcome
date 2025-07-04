@@ -255,6 +255,9 @@ module.exports = {
   *                                                                          *
   ***************************************************************************/
   sockets: {
+    onlyAllowOrigins: [
+      'https://wellcome-six.vercel.app/' // ← thay bằng đúng domain React frontend của bạn
+    ]
 
     /***************************************************************************
     *                                                                          *
