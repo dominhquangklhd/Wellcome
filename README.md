@@ -1,10 +1,7 @@
 <div id="top">
 </div>
-<h1>MOVIE TICKET APP</h1>
+<h1>CRUD PRODUCT APP</h1>
 <!-- MOVIE TICKET APP -->
-<a style="text-decoration: none;" href="#Top">
-    <img src="./app/src/main/res/drawable/logo.png" alt="Logo Movie Ticket App" width="250"/>
-</a>
 
 ## Danh mục
 
@@ -36,10 +33,9 @@
 <div id="Modau"></div>
 
 ## I. Mở đầu
-Hiện nay, việc xem phim ảnh đã trở thành một hoạt động giải trí phổ biến và thu hút một lượng người xem đông đảo. Rạp chiếu phim là một điểm đến phổ biến cho những ai muốn tận hưởng trải nghiệm xem phim trên màn hình lớn và với âm thanh chất lượng cao.
-Tầm quan trọng của một ứng dụng quản lí rạp phim không thể phủ nhận. Xuất phát từ nhu cầu thực tế trong đời sống, việc có một hệ thống quản lý lịch trình và thời gian rõ ràng là rất cần thiết để đảm bảo công việc quản lí và tổ chức hoạt động của rạp phim diễn ra một cách dễ dàng và hiệu quả.
-Với sự xuất hiện của ứng dụng quản lí rạp phim, tất cả những khó khăn sẽ được giải quyết một cách đáng kể. Bằng cách áp dụng công nghệ và tích hợp các tính năng thông minh, ứng dụng giúp quản lí rạp phim tạo ra lịch chiếu chính xác, tối ưu hóa việc bố trí suất chiếu và quản lí vé một cách hiệu quả.
-Đặc biệt, việc có một ứng dụng quản lí rạp phim còn giúp tăng cường tương tác với khách hàng. Thông qua ứng dụng, khách hàng có thể dễ dàng tìm hiểu thông tin về các bộ phim đang chiếu, xem trailer và đặt vé một cách thuận tiện. Điều này tạo ra sự tiện lợi và trải nghiệm tốt hơn cho khách hàng, đồng thời giúp rạp phim thu hút được đông đảo khán giả. 
+Trong thời đại số, việc quản lý sản phẩm một cách hiệu quả là yếu tố quan trọng đối với các cửa hàng và doanh nghiệp. Khi số lượng sản phẩm tăng lên, việc theo dõi và cập nhật thủ công trở nên kém hiệu quả, dễ gây sai sót.
+Ứng dụng quản lý sản phẩm (Mini CMS) ra đời nhằm hỗ trợ người dùng thực hiện các thao tác như thêm, sửa, xóa, tìm kiếm và phân trang sản phẩm một cách nhanh chóng. Giao diện thân thiện, tích hợp các tính năng như chế độ tối (dark mode) và lưu trữ cục bộ giúp nâng cao trải nghiệm người dùng.
+Dự án đồng thời là cơ hội để vận dụng kiến thức về React và Sails.js, rèn luyện kỹ năng xây dựng hệ thống quản lý thực tế, có thể mở rộng trong tương lai.
 
 
 <!-- MÔ TẢ -->
