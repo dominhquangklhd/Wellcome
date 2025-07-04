@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../../services/ProductService";
 
 function Buoi1() {
   const [pongMessage, setPongMessage] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:1337/api/ping")
+      .get(API_URL)
       .then((response) => {
         setPongMessage(response.data.message);
       })

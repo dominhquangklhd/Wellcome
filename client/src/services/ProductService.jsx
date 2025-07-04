@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:1337/api/products';
+const isProd = window.location.hostname !== 'localhost';
+
+export const API_URL = isProd
+  ? 'https://wellcome-ynlb.onrender.com/api/products'
+  : 'http://localhost:1337/api/products';
 
 const ProductService = {
   // Lấy danh sách sản phẩm
