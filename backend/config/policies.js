@@ -26,7 +26,11 @@ module.exports.policies = {
     '*': true
   },
 
-  Product: {
+  ProductController: {
+    '*': 'isAuthenticated'
+  },
+
+  AuthController: {
     '*': true
   }
 

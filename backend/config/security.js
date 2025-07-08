@@ -30,8 +30,9 @@ module.exports.security = {
 
   cors: {
     allRoutes: true,
-    allowOrigins: '*',
-    allowCredentials: false,
+    allowOrigins: ['http://localhost:3000', 'https://wellcome-six.vercel.app'],
+    allowCredentials: true,
+    allowRequestHeaders: 'content-type, authorization',
   },
 
 

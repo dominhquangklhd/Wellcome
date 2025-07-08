@@ -9,8 +9,20 @@
 module.exports = {
   // GET /api/products
   find: async function (req, res) {
-    const products = await Product.find();
-    return res.json(products);
+    const search = req.query.search || '';
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    const total = await Product.count({
+      where: { name: { contains: search } },
+    });
+
+    const products = await Product.find({
+      where: { name: { contains: search } },
+    }).skip(skip).limit(limit);
+    
+    return res.json({ total, products });
   },
 
   // GET /api/products/:id
@@ -30,7 +42,10 @@ module.exports = {
   // PUT /api/products/:id
   update: async function (req, res) {
     const { name, price } = req.body;
-    const updatedProduct = await Product.updateOne({ id: req.params.id }).set({ name, price });
+    const updatedProduct = await Product.updateOne({ id: req.params.id }).set({
+      name,
+      price,
+    });
     if (!updatedProduct) return res.notFound();
     return res.json(updatedProduct);
   },
@@ -40,6 +55,5 @@ module.exports = {
     const deletedProduct = await Product.destroyOne({ id: req.params.id });
     if (!deletedProduct) return res.notFound();
     return res.json({ message: "Deleted successfully" });
-  }
+  },
 };
-

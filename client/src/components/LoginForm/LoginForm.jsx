@@ -1,0 +1,48 @@
+import { useState } from 'react';
+import axios from 'axios';
+import ProductService from '../../services/ProductService';
+
+function LoginForm() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const data = await ProductService.login(email, password);
+
+            localStorage.setItem('token', data.token);
+            window.location.href = '/products';
+        } catch (err) {
+            setError(err.response?.data?.message || 'Đăng nhập thất bại');
+        }
+    };
+
+    return (
+        <form onSubmit={handleLogin}>
+            <h2>Đăng nhập</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+
+            <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            /><br />
+
+            <input
+                type="password"
+                placeholder="Mật khẩu"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+            /><br />
+
+            <button type="submit">Đăng nhập</button>
+        </form>
+    );
+}
+
+export default LoginForm;

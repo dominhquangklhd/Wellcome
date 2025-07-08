@@ -1,15 +1,9 @@
-import { useMemo } from "react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 
-function ProductList({ products, onDelete, onEdit, editingProduct, setEditingProduct, currentPage, setCurrentPage }) {
+function ProductList({ products, onDelete, onEdit, editingProduct, setEditingProduct, currentPage, setCurrentPage, totalProducts }) {
     const itemsPerPage = 5;
-    const totalPages = Math.ceil(products.length / itemsPerPage);
-
-    const paginatedProducts = useMemo(() => {
-        const start = (currentPage - 1) * itemsPerPage;
-        return products.slice(start, start + itemsPerPage);
-    }, [products, currentPage]);
+    const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
     return (
         <>
@@ -23,7 +17,7 @@ function ProductList({ products, onDelete, onEdit, editingProduct, setEditingPro
                     </tr>
                 </thead>
                 <tbody>
-                    {paginatedProducts.map((p) => (
+                    {products.map((p) => (
                         <tr key={p.id}>
                             <td>{p.id}</td>
                             {editingProduct && editingProduct.id === p.id ?

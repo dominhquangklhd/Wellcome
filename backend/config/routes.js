@@ -69,4 +69,7 @@ module.exports.routes = {
   'POST /api/products': 'ProductController.create',
   'PUT /api/products/:id': 'ProductController.update',
   'DELETE /api/products/:id': 'ProductController.delete',
+
+  'POST /auth/login': 'AuthController.login',
+  'POST /auth/signup': 'AuthController.signup',
 };

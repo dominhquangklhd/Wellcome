@@ -9,11 +9,18 @@ import ProductList from '../../components/ProductList/ProductList';
 import AboutPage from '../AboutPage/AboutPage';
 import Button from '../../components/Button/Button';
 import SearchPage from '../SearchPage/SearchPage';
+import { Modal } from '../../components/Modal/Modal';
+import SignupForm from '../../components/SignupForm/SignupForm';
+import LoginForm from '../../components/LoginForm/LoginForm';
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalProducts, setTotalProducts] = useState(0);
+
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light';
@@ -27,14 +34,15 @@ function ProductPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await ProductService.getAll();
-        setProducts(data);
+        const data = await ProductService.getAll(currentPage);
+        setProducts(data.products);
+        setTotalProducts(data.total);
       } catch (error) {
         console.error('Lỗi lấy danh sách:', error);
       }
     };
     fetchProducts();
-  }, []);
+  }, [currentPage]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
@@ -81,8 +89,27 @@ function ProductPage() {
           onClick={toggleTheme}
           className={'theme-button'}
         />
+        <div>
+          <button onClick={() => setShowLogin(true)} className="auth-button">
+            Đăng nhập
+          </button>
+          <button onClick={() => setShowSignup(true)} className="auth-button">
+            Đăng ký
+          </button>
+        </div>
       </header>
       <div className="main-buoi2">
+        {showLogin && (
+          <Modal onClose={() => setShowLogin(false)}>
+            <LoginForm />
+          </Modal>
+        )}
+
+        {showSignup && (
+          <Modal onClose={() => setShowSignup(false)}>
+            <SignupForm />
+          </Modal>
+        )}
         <aside className="sidebar">
           <Link to="/products">
             <Button children={<>Sản phẩm</>} />
@@ -109,6 +136,7 @@ function ProductPage() {
                 setEditingProduct={setEditingProduct}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
+                totalProducts={totalProducts}
               />} />
             <Route path="/add" element={<ProductForm onAddProduct={handleAddProduct} />} />
             <Route path="/about" element={<AboutPage />} />
