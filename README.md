@@ -1,6 +1,6 @@
 <div id="top">
 </div>
-<h1>CMS PRODUCT MANGAGEMENT</h1>
+<h1>PRODUCT CMS</h1>
 <!-- CMS PRODUCT MANGAGEMENT -->
 
 ## Danh mục
