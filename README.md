@@ -26,7 +26,7 @@
 
 [V. Hướng phát triển tiếp theo](#Huongphattrientieptheo)
 
-Sản phẩm đã được deploy:
+Sản phẩm đã được deploy (chạy Backend trước, Frontend sau):
 - Frontend: https://wellcome-six.vercel.app/
 - Backend: https://wellcome-ynlb.onrender.com/
 
