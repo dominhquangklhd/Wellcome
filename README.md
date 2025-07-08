@@ -131,8 +131,8 @@ Dự án đồng thời là cơ hội để vận dụng kiến thức về Reac
 ### 2. Clone dự án
 
 ```bash
-git clone https://github.com/your-username/mini-cms.git
-cd mini-cms
+git clone https://github.com/dominhquangklhd/Wellcome.git
+cd Wellcome
 ```
 
 ### 3. Tạo file .env
