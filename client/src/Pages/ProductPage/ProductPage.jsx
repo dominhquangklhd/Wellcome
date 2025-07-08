@@ -21,6 +21,20 @@ function ProductPage() {
 
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLogin(false);
+    window.location.href = '/products';
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) setIsLogin(true);
+    console.log(products);
+    
+  }, []);
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light';
@@ -89,19 +103,28 @@ function ProductPage() {
           onClick={toggleTheme}
           className={'theme-button'}
         />
-        <div>
-          <button onClick={() => setShowLogin(true)} className="auth-button">
-            Đăng nhập
-          </button>
-          <button onClick={() => setShowSignup(true)} className="auth-button">
-            Đăng ký
-          </button>
-        </div>
+        {!isLogin ?
+          <div>
+            <button onClick={() => setShowLogin(true)} className="auth-button">
+              Đăng nhập
+            </button>
+            <button onClick={() => setShowSignup(true)} className="auth-button">
+              Đăng ký
+            </button>
+          </div>
+          :
+          <div>
+            <button onClick={handleLogout} className="auth-button">
+              Đăng xuất
+            </button>
+          </div>
+        }
+
       </header>
       <div className="main-buoi2">
         {showLogin && (
           <Modal onClose={() => setShowLogin(false)}>
-            <LoginForm />
+            <LoginForm setIsLogin={setIsLogin} />
           </Modal>
         )}
 

@@ -21,7 +21,7 @@ module.exports = {
     const products = await Product.find({
       where: { name: { contains: search } },
     }).skip(skip).limit(limit);
-    
+
     return res.json({ total, products });
   },
 

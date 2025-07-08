@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import axios from 'axios';
 import ProductService from '../../services/ProductService';
 
-function LoginForm() {
+function LoginForm({ setIsLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -11,8 +10,8 @@ function LoginForm() {
         e.preventDefault();
         try {
             const data = await ProductService.login(email, password);
-
             localStorage.setItem('token', data.token);
+            setIsLogin(true);
             window.location.href = '/products';
         } catch (err) {
             setError(err.response?.data?.message || 'Đăng nhập thất bại');
