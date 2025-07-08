@@ -169,11 +169,7 @@ npm start
 
 * Hỗ trợ tải lên và hiển thị hình ảnh sản phẩm.
 
-* Triển khai ứng dụng online:
-
- - Backend (Sails.js) lên Render
-
- - Frontend (React) lên Vercel hoặc Netlify
+* Triển khai ứng dụng online: Backend (Sails.js) lên Render, Frontend (React) lên Vercel
 
 * Tối ưu giao diện responsive để hiển thị tốt trên điện thoại và máy tính bảng.
 
