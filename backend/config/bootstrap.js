@@ -8,72 +8,91 @@
  * For more information on seeding your app with fake data, check out:
  * https://sailsjs.com/config/bootstrap
  */
+const bcrypt = require('bcrypt');
 
-module.exports.bootstrap = async function() {
+module.exports.bootstrap = async function (done) {
+  const Role = sails.models.role;
+  const Permission = sails.models.permission;
 
-  // Import dependencies
-  // var path = require('path');
+  try {
+    sails.log.info('🔐 [RBAC] Bắt đầu seed role & permission...');
 
-  // // This bootstrap version indicates what version of fake data we're dealing with here.
-  // var HARD_CODED_DATA_VERSION = 0;
+    const permissionList = [
+      { action: 'view_product', description: 'Xem sản phẩm' },
+      { action: 'add_product', description: 'Thêm sản phẩm' },
+      { action: 'edit_product', description: 'Chỉnh sửa sản phẩm' },
+      { action: 'delete_product', description: 'Xóa sản phẩm' },
+      { action: 'manage_roles', description: 'Quản lý vai trò' },
+      { action: 'manage_permissions', description: 'Quản lý quyền' },
+      { action: 'view_user', description: 'Xem danh sách user' },
+      { action: 'edit_user', description: 'Chỉnh sửa user' },
+    ];
 
-  // // This path indicates where to store/look for the JSON file that tracks the "last run bootstrap info"
-  // // locally on this development computer (if we happen to be on a development computer).
-  // var bootstrapLastRunInfoPath = path.resolve(sails.config.appPath, '.tmp/bootstrap-version.json');
+    for (const perm of permissionList) {
+      const exists = await Permission.findOne({ action: perm.action });
+      if (!exists) {
+        await Permission.create(perm);
+        sails.log.info(`✔️  Tạo permission: ${perm.action}`);
+      }
+    }
 
-  // // Whether or not to continue doing the stuff in this file (i.e. wiping and regenerating data)
-  // // depends on some factors:
-  // // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    const allPermissions = await Permission.find();
 
-  // // If the hard-coded data version has been incremented, or we're being forced
-  // // (i.e. `--drop` or `--environment=test` was set), then run the meat of this
-  // // bootstrap script to wipe all existing data and rebuild hard-coded data.
-  // if (sails.config.models.migrate !== 'drop' && sails.config.environment !== 'test') {
-  //   // If this is _actually_ a production environment (real or simulated), or we have
-  //   // `migrate: safe` enabled, then prevent accidentally removing all data!
-  //   if (process.env.NODE_ENV==='production' || sails.config.models.migrate === 'safe') {
-  //     sails.log('Since we are running with migrate: \'safe\' and/or NODE_ENV=production (in the "'+sails.config.environment+'" Sails environment, to be precise), skipping the rest of the bootstrap to avoid data loss...');
-  //     return;
-  //   }//•
+    const roles = [
+      {
+        name: 'admin',
+        permissions: allPermissions.map(p => p.id),
+      },
+      {
+        name: 'editor',
+        permissions: allPermissions.filter(p =>
+          ['view_product', 'add_product', 'edit_product'].includes(p.action)
+        ).map(p => p.id),
+      },
+      {
+        name: 'user',
+        permissions: allPermissions.filter(p =>
+          ['view_product'].includes(p.action)
+        ).map(p => p.id),
+      },
+    ];
 
-  //   // Compare bootstrap version from code base to the version that was last run
-  //   var lastRunBootstrapInfo = await sails.helpers.fs.readJson(bootstrapLastRunInfoPath)
-  //   .tolerate('doesNotExist');// (it's ok if the file doesn't exist yet-- just keep going.)
+    for (const role of roles) {
+      let roleRecord = await Role.findOne({ name: role.name });
+      if (!roleRecord) {
+        roleRecord = await Role.create({ name: role.name }).fetch();
+        sails.log.info(`✔️  Tạo role: ${role.name}`);
+      }
 
-  //   if (lastRunBootstrapInfo && lastRunBootstrapInfo.lastRunVersion === HARD_CODED_DATA_VERSION) {
-  //     sails.log('Skipping v'+HARD_CODED_DATA_VERSION+' bootstrap script...  (because it\'s already been run)');
-  //     sails.log('(last run on this computer: @ '+(new Date(lastRunBootstrapInfo.lastRunAt))+')');
-  //     return;
-  //   }//•
+      await Role.replaceCollection(roleRecord.id, 'permissions').members(role.permissions);
+    }
 
-  //   sails.log('Running v'+HARD_CODED_DATA_VERSION+' bootstrap script...  ('+(lastRunBootstrapInfo ? 'before this, the last time the bootstrap ran on this computer was for v'+lastRunBootstrapInfo.lastRunVersion+' @ '+(new Date(lastRunBootstrapInfo.lastRunAt)) : 'looks like this is the first time the bootstrap has run on this computer')+')');
-  // }
-  // else {
-  //   sails.log('Running bootstrap script because it was forced...  (either `--drop` or `--environment=test` was used)');
-  // }
+    sails.log.info('✅ [RBAC] Hoàn tất seed Role & Permission.');
 
-  // // Since the hard-coded data version has been incremented, and we're running in
-  // // a "throwaway data" environment, delete all records from all models.
-  // for (let identity in sails.models) {
-  //   await sails.models[identity].destroy({});
-  // }//∞
+    sails.log.info('🔑 [RBAC] Bắt đầu tạo user admin mặc định...');
+    // Tạo user admin mặc định
+    const User = sails.models.user;
+    // await User.destroy({}); // Xoá tất cả user trước khi tạo mới
 
-  // // By convention, this is a good place to set up fake data during development.
-  // await User.createEach([
-  //   { email: 'admin@example.com', fullName: 'Ryan Dahl', isSuperAdmin: true, password: await sails.helpers.passwords.hashPassword('abc123') },
-  // ]);
+    const existingAdmin = await User.findOne({ email: 'admin@example.com' });
+    if (!existingAdmin) {
+      const hashedPassword = await bcrypt.hash('123456', 10);
 
-  // // Save new bootstrap version
-  // await sails.helpers.fs.writeJson.with({
-  //   destination: bootstrapLastRunInfoPath,
-  //   json: {
-  //     lastRunVersion: HARD_CODED_DATA_VERSION,
-  //     lastRunAt: Date.now()
-  //   },
-  //   force: true
-  // })
-  // .tolerate((err)=>{
-  //   sails.log.warn('For some reason, could not write bootstrap version .json file.  This could be a result of a problem with your configured paths, or, if you are in production, a limitation of your hosting provider related to `pwd`.  As a workaround, try updating app.js to explicitly pass in `appPath: __dirname` instead of relying on `chdir`.  Current sails.config.appPath: `'+sails.config.appPath+'`.  Full error details: '+err.stack+'\n\n(Proceeding anyway this time...)');
-  // });
+      const newAdmin = await User.create({
+        email: 'admin@example.com',
+        password: hashedPassword,
+      }).fetch();
 
+      const adminRole = await Role.findOne({ name: 'admin' });
+      if (adminRole) {
+        await User.addToCollection(newAdmin.id, 'roles').members([adminRole.id]);
+        sails.log.info('👑 Tạo user admin mặc định: admin@example.com / 123456');
+      }
+    }
+    return done();
+  } catch (err) {
+    sails.log.error('❌ Lỗi khi seed RBAC trong bootstrap:', err);
+    return done(err);
+  }
 };
+

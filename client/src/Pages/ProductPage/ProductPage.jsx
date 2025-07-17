@@ -12,6 +12,10 @@ import SearchPage from '../SearchPage/SearchPage';
 import { Modal } from '../../components/Modal/Modal';
 import SignupForm from '../../components/SignupForm/SignupForm';
 import LoginForm from '../../components/LoginForm/LoginForm';
+import usePermission from '../../hooks/usePermission';
+import ManageRoles from '../ManageRolesPage/ManageRoles';
+import ManagePermissions from '../ManagePermissionsPage/ManagePermissions';
+import PageManagement from '../PageManagement/PageManagement';
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
@@ -23,8 +27,11 @@ function ProductPage() {
   const [showSignup, setShowSignup] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
 
+  const { can } = usePermission();
+
   const handleLogout = () => {
     localStorage.removeItem('token');
+    sessionStorage.removeItem("permissions");
     setIsLogin(false);
     window.location.href = '/products';
   };
@@ -33,7 +40,7 @@ function ProductPage() {
     const token = localStorage.getItem('token');
     if (token) setIsLogin(true);
     console.log(products);
-    
+
   }, []);
 
   const [theme, setTheme] = useState(() => {
@@ -134,18 +141,48 @@ function ProductPage() {
           </Modal>
         )}
         <aside className="sidebar">
-          <Link to="/products">
-            <Button children={<>Sản phẩm</>} />
-          </Link>
-          <Link to="/add">
-            <Button children={<>Thêm</>} />
-          </Link>
+          {can('view_product') &&
+            <>
+              <Link to="/products">
+                <Button children={<>Sản phẩm</>} />
+              </Link>
+              <Link to="/search">
+                <Button children={<>Tìm kiếm</>} />
+              </Link>
+            </>
+          }
+          {
+            can('add_product') &&
+            <Link to="/add">
+              <Button children={<>Thêm</>} />
+            </Link>
+          }
           <Link to="/about">
             <Button children={<>Giới thiệu</>} />
           </Link>
-          <Link to="/search">
-            <Button children={<>Tìm kiếm</>} />
-          </Link>
+          {
+            can('manage_roles') &&
+            <Link to="/manage-roles">
+              <Button children={<>Quản lý Roles</>} />
+            </Link>
+          }
+          {
+            can('manage_permissions') &&
+            <Link to="/manage-permissions">
+              <Button children={<>Quản lý Permissions</>} />
+            </Link>
+          }
+          {
+            can('manage_pages') &&
+            <>
+              <Link to="/page/products">
+                <Button children={<>Quản lý Pages Sản phẩm</>} />
+              </Link>
+              {/* <Link to="/page/users">
+                <Button children={<>Quản lý Pages User</>} />
+              </Link> */}
+            </>
+          }
         </aside>
         <section className="content">
           <h1>Quản lý sản phẩm</h1>
@@ -171,6 +208,9 @@ function ProductPage() {
                 editingProduct={editingProduct}
                 setEditingProduct={setEditingProduct}
               />} />
+            <Route path="/manage-roles" element={<ManageRoles />} />
+            <Route path="/manage-permissions/*" element={<ManagePermissions />} />
+            <Route path="/page/:pageKey" element={<PageManagement />} />
           </Routes>
         </section>
       </div>

@@ -1,9 +1,11 @@
+import usePermission from "../../hooks/usePermission";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 
 function ProductList({ products, onDelete, onEdit, editingProduct, setEditingProduct, currentPage, setCurrentPage, totalProducts }) {
     const itemsPerPage = 5;
     const totalPages = Math.ceil(totalProducts / itemsPerPage);
+    const { can } = usePermission();
 
     return (
         <>
@@ -42,21 +44,26 @@ function ProductList({ products, onDelete, onEdit, editingProduct, setEditingPro
                                     <td>{p.price}</td>
                                 </>}
                             <td>
-                                {editingProduct && editingProduct.id === p.id ?
-                                    <Button
+                                {can('edit_product') && (
+                                    editingProduct && editingProduct.id === p.id ? (
+                                        <Button
                                         children={<>Cập nhật</>}
                                         onClick={() => onEdit(editingProduct)}
-                                    />
-                                    :
-                                    <Button
+                                        />
+                                    ) : (
+                                        <Button
                                         children={<>Sửa</>}
                                         onClick={() => onEdit(p)}
+                                        />
+                                    )
+                                )}
+
+                                {can('edit_product') &&
+                                    <Button
+                                        children={<>Xóa</>}
+                                        onClick={() => onDelete(p.id)}
                                     />
                                 }
-                                <Button
-                                    children={<>Xóa</>}
-                                    onClick={() => onDelete(p.id)}
-                                />
                             </td>
                         </tr>
                     ))}

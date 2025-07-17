@@ -11,6 +11,7 @@ function LoginForm({ setIsLogin }) {
         try {
             const data = await ProductService.login(email, password);
             localStorage.setItem('token', data.token);
+            sessionStorage.setItem('permissions', JSON.stringify(data.user.permissions));
             setIsLogin(true);
             window.location.href = '/products';
         } catch (err) {

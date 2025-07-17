@@ -6,11 +6,11 @@ const API_URL = isProd
   ? 'https://wellcome-ynlb.onrender.com/api/products'
   : 'http://localhost:1337/api/products';
 
-const BASE_URL = isProd
+export const BASE_URL = isProd
   ? 'https://wellcome-ynlb.onrender.com'
   : 'http://localhost:1337';
 
-const authHeader = {
+export const authHeader = {
   headers: {
     Authorization: `Bearer ${localStorage.getItem('token')}`,
   },

@@ -10,7 +10,7 @@
 
 module.exports.policies = {
 
-  '*': 'is-logged-in',
+  '*': 'isAuthenticated',
 
   // Bypass the `is-logged-in` policy for:
   'entrance/*': true,
@@ -27,11 +27,20 @@ module.exports.policies = {
   },
 
   ProductController: {
-    '*': 'isAuthenticated'
+    '*': 'isAuthenticated',
+    create: 'hasPermission',
+    update: 'hasPermission',
+    delete: 'hasPermission',
+    find: 'hasPermission',
+    findOne: 'hasPermission',
   },
 
   AuthController: {
     '*': true
-  }
+  },
+
+  RoleController: {
+    '*': 'hasPermission',
+  },
 
 };
