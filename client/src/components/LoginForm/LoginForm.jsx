@@ -10,10 +10,10 @@ function LoginForm({ setIsLogin }) {
         e.preventDefault();
         try {
             const data = await ProductService.login(email, password);
-            localStorage.setItem('token', data.token);
+            sessionStorage.setItem('token', data.token);
             sessionStorage.setItem('permissions', JSON.stringify(data.user.permissions));
             setIsLogin(true);
-            window.location.href = '/products';
+            window.location.href = '/';
         } catch (err) {
             setError(err.response?.data?.message || 'Đăng nhập thất bại');
         }

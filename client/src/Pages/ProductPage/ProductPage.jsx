@@ -30,14 +30,14 @@ function ProductPage() {
   const { can } = usePermission();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     sessionStorage.removeItem("permissions");
     setIsLogin(false);
-    window.location.href = '/products';
+    window.location.href = '/';
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if (token) setIsLogin(true);
     console.log(products);
 
