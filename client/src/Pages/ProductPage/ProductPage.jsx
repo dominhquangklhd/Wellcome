@@ -169,7 +169,7 @@ function ProductPage() {
           {
             can('manage_permissions') &&
             <Link to="/manage-permissions">
-              <Button children={<>Quản lý Permissions</>} />
+              <Button products={products} children={<>Quản lý Permissions</>} />
             </Link>
           }
           {
@@ -210,7 +210,9 @@ function ProductPage() {
               />} />
             <Route path="/manage-roles" element={<ManageRoles />} />
             <Route path="/manage-permissions/*" element={<ManagePermissions />} />
-            <Route path="/page/:pageKey" element={<PageManagement />} />
+            <Route path="/page/:pageKey" element={
+              <PageManagement />}
+            />
           </Routes>
         </section>
       </div>

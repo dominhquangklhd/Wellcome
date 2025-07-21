@@ -1,42 +1,47 @@
 // src/config/pagesConfig.js
-
-import { BASE_URL, authHeader } from '../../../services/ProductService';
-
 export const pagesConfig = {
   products: {
-    title: 'Quản lý sản phẩm',
+    title: "Quản lý sản phẩm",
     table: {
-      fetchUrl: `${BASE_URL}/api/products`,
-      columns: ['name', 'price'],
+      columns: ["id", "name", "price", "actions"],
     },
     form: {
       fields: [
-        { name: 'name', label: 'Tên sản phẩm', type: 'text' },
-        { name: 'price', label: 'Giá', type: 'number' },
+        { name: "name", label: "Tên sản phẩm", type: "text" },
+        { name: "price", label: "Giá", type: "number" },
       ],
-      submitUrl: `${BASE_URL}/api/products`,
-      method: 'POST',
     },
     buttons: [
       {
-        key: 'create',
-        label: 'Thêm sản phẩm',
-        variant: 'primary',
-        action: 'openFormModal',
+        key: "edit",
+        label: "Sửa",
+        variant: "primary",
+        action: "editProduct",
       },
       {
-        key: 'refresh',
-        label: 'Làm mới',
-        variant: 'ghost',
-        action: 'refreshTableData',
+        key: "update",
+        label: "Cập nhật",
+        variant: "primary",
+        action: "updateProduct",
       },
       {
-        key: 'export',
-        label: 'Xuất Excel',
-        variant: 'success',
-        action: 'exportToExcel',
+        key: "delete",
+        label: "Xoá",
+        variant: "delete",
+        action: "deleteProduct",
+      },
+      {
+        key: "cancel",
+        label: "Hủy",
+        variant: "ghost",
+        action: "cancel",
+      },
+      {
+        key: "submit",
+        label: "Xác nhận",
+        variant: "submit",
+        action: "submitAction",
       },
     ],
-    authHeader,
   },
 };
